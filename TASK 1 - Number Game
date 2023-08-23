@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+public class NumberGame {
+    public static void main(String[] args) {
+        //random number within a specified range, 1 to 100.
+        int min = 1;
+        int max = 100;
+        int guess_number = -1;
+        int attempts = 5; //number of attempts to guess the number.
+        boolean playAgain = true; //multiple rounds, user can play again.
+        Scanner sc = new Scanner(System.in);
+        while (playAgain) {
+            int random_number = (min + (int) (Math.random() * ((max - min) + 1)));
+            System.out.println(random_number);
+            int i;
+            for(i = 0; i < attempts; i++)
+            {
+                System.out.print("Enter your guess (1 - 100) : ");
+                guess_number = sc.nextInt();
+                if(guess_number == random_number)
+                {
+                    System.out.println("Your guess is correct");
+                    break;
+                }
+                else if (guess_number > random_number) {
+                    if((guess_number - random_number) > 10){
+                        System.out.println("Too High");
+                    }
+                    else{
+                        System.out.println("High");
+                    }
+                } else if (guess_number < random_number) {
+                    if((random_number - guess_number) > 10){
+                        System.out.println("Too Low");
+                    }
+                    else{
+                        System.out.println("Low");
+                    }
+                }
+            }
+            switch (i){
+                case 0 -> System.out.println("Total points : 100");
+                case 1 -> System.out.println("Total points : 80");
+                case 2 -> System.out.println("Total points : 60");
+                case 3 -> System.out.println("Total points : 40");
+                case 4 -> System.out.println("Total points : 20");
+            }
+            if(i >= attempts)
+            {
+                playAgain = false;
+                System.out.println("Sorry, You lost your attempts");
+                System.out.println("Total points : 0");
+            }
+            System.out.print("Do you want to play again? (yes/no) : ");
+            String play = sc.next().toLowerCase();
+            playAgain = play.equals("yes");
+        }
+    }
+}
